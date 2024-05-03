@@ -105,7 +105,7 @@ if csv_file is not None:
  
 def generate_download_button():
     # Define the path to the sample template CSV file
-    file_path = 'resources/Price_Master_sample_template.csv'
+    file_path = 'Resources/Price_Master_sample_template.csv'
     
     # Read the file data
     with open(file_path, 'rb') as f:
