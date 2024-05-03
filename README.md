@@ -29,6 +29,6 @@ Our platform is hosted at [pricemaster.streamlit.app](https://pricemaster.stream
 To set up the platform locally, follow these steps:
 1. Clone the repository.
 2. Install dependencies using `pip install -r requirements.txt`.
-3. Run the main script `1_search_cars.py` using Streamlit: `streamlit run 1_search_cars.py`.
+3. Run the main script `1_search_cars.py` using Streamlit: `python -m streamlit run 1_search_cars.py`.
 
 Thank you for considering our platform. We're excited to embark on this journey with you as we reshape the future of car resale.
