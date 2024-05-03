@@ -113,8 +113,9 @@ if csv_file is not None:
     # Add predicted price column
     df_upload_with_predictions = add_predicted_price(df_upload)
     
+    
     # Display the filtered data
-    user_friendly_names=['Name','Registered Year','Engine Capacity','Kms Driven','Max Power','Seats','Mileage','Insurance','Transmission Type','Fuel Type','Body Type','Owner Type','Predicted Price']
+    user_friendly_names=['Name','Registered year','Engine capacity','Kms driven','Max power','Seats','Mileage','Insurance','Transmission type','Fuel type','Body Type','Owner_type_Value','Predicted Price']
     df_upload_with_predictions.rename(columns=dict(zip(df_upload_with_predictions.columns, user_friendly_names)), inplace=True)
 
     # Display DataFrame with predicted price

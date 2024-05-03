@@ -15,10 +15,10 @@ df = load_data()
 # Sidebar filters
 # Sorting options
 sort_options = {
-    'Price: Low to High': 'resale_price',
     'Price: High to Low': 'resale_price',
-    'Miles: Low to High': 'kms_driven',
+    'Price: Low to High': 'resale_price',
     'Miles: High to Low': 'kms_driven',
+    'Miles: Low to High': 'kms_driven',
     'Oldest': 'registered_year',
     'Newest': 'registered_year'
 }
@@ -95,10 +95,9 @@ columns_to_exclude = ['insurance_value', 'transmission_type_value','fuel_type_va
 df_filtered = df.drop(columns=columns_to_exclude)
 
 # Display the filtered data
-user_friendly_names=['Name','Registered Year','Engine Capacity','Kms Driven','Max Power','Seats','Mileage','Insurance','Transmission Type','Fuel Type','Body Type','Owner Type']
+user_friendly_names=['Name','Resale Price','Registered year','Engine capacity','Insurance','Transmission type','Kms driven','Owner type','Fuel type','Max power','Seats','Mileage','Body type','City']
 df_filtered.rename(columns=dict(zip(df_filtered.columns, user_friendly_names)), inplace=True)
 st.write(df_filtered.iloc[start_idx:end_idx])
-
 
 st.write(f'Page {current_page} of {total_pages}')
 
