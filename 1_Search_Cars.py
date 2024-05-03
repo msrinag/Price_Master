@@ -95,8 +95,11 @@ columns_to_exclude = ['insurance_value', 'transmission_type_value','fuel_type_va
 df_filtered = df.drop(columns=columns_to_exclude)
 
 # Display the filtered data
-
+user_friendly_names=['Name','Registered Year','Engine Capacity','Kms Driven','Max Power','Seats','Mileage','Insurance','Transmission Type','Fuel Type','Body Type','Owner Type']
+df_filtered.rename(columns=dict(zip(df_filtered.columns, user_friendly_names)), inplace=True)
 st.write(df_filtered.iloc[start_idx:end_idx],index=False)
+
+
 st.write(f'Page {current_page} of {total_pages}')
 
 

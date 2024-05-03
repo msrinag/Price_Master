@@ -31,7 +31,7 @@ def nacheck(df):
     na_mask = df.isna().any(axis=1)
     if na_mask.any():
     # Print the row numbers where missing values exist
-        st.write("Recheck values for Rows: "+"".join(map(str,na_mask[na_mask].index)))
+        st.write("Recheck values for Rows: "+" ".join(map(str,na_mask[na_mask].index)))
 
 # Load the trained model
 with open('Resources/xgb_model.pkl', 'rb') as file:
@@ -113,8 +113,13 @@ if csv_file is not None:
     # Add predicted price column
     df_upload_with_predictions = add_predicted_price(df_upload)
     
+    # Display the filtered data
+    user_friendly_names=['Name','Registered Year','Engine Capacity','Kms Driven','Max Power','Seats','Mileage','Insurance','Transmission Type','Fuel Type','Body Type','Owner Type','Predicted Price']
+    df_upload_with_predictions.rename(columns=dict(zip(df_upload_with_predictions.columns, user_friendly_names)), inplace=True)
+
     # Display DataFrame with predicted price
     st.write(df_upload_with_predictions)
+    
 
     # Download button for updated CSV file
     st.sidebar.download_button(label='Download Predictions CSV', data=df_upload_with_predictions.to_csv(index=False), file_name='predictions.csv')
