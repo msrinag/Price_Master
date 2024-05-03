@@ -68,4 +68,70 @@ if st.button('Get Price'):
     
     # Display estimated price
     st.success(f"Estimated Price: ₹ {predictions[0]}")
+    
+    
+# Add sidebar heading
+st.sidebar.header('Try Our Batch Estimator')
+
+# Add file uploader for CSV file
+csv_file = st.sidebar.file_uploader('Upload CSV File', type=['csv'])
+
+# Function to add predicted price column to CSV file
+def add_predicted_price(df):
+    # Map categorical data to numerical values
+    df = map_data_to_model(df)
+    
+    # Make predictions
+    predictions = loaded_model.predict(df.drop(columns=['name']))
+    
+    # Add predicted price column to DataFrame
+    df['Predicted Price'] = predictions
+    
+    return df
+
+# Process CSV file and display predictions
+if csv_file is not None:
+    # Read CSV file into DataFrame
+    df_upload = pd.read_csv(csv_file)
+    
+    # Add predicted price column
+    df_upload_with_predictions = add_predicted_price(df_upload)
+    
+    # Display DataFrame with predicted price
+    st.write(df_upload_with_predictions)
+
+    # Download button for updated CSV file
+    st.sidebar.download_button(label='Download Predictions CSV', data=df_upload_with_predictions.to_csv(index=False), file_name='predictions.csv')
+ 
+def generate_download_button():
+    # Define the path to the sample template CSV file
+    file_path = 'resources/Price_Master_sample_template.csv'
+    
+    # Read the file data
+    with open(file_path, 'rb') as f:
+        st.sidebar.download_button(
+        label='Download Sample Template',
+        data=f.read(),
+        file_name='Price_Master_Template.csv'
+    )
+    
+  
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+st.sidebar.write('\n')
+generate_download_button()  
+
+
+
+
+
 
