@@ -4,6 +4,11 @@ import pickle
 import os
 from xgboost import XGBRegressor
 
+st.set_page_config(
+    page_title="Price Master",
+    page_icon=":car:"
+)
+
 # Function to map categorical data to numerical values
 def map_data_to_model(data):
     insurance_mapping = {'Zero Dep':6,'Comprehensive': 5, 'First Party': 4, 'Second Party':3,'Third Party': 2, 'Not Available': 1}
@@ -28,19 +33,22 @@ with open('Resources/xgb_model.pkl', 'rb') as file:
 st.title('Car Price Estimator')
 
 # Input form
-st.header('Enter Car Details')
-name = st.text_input('Car Name')
-registered_year = st.number_input('Registered Year', value=2016,step=1,min_value=1900, max_value=2024)
-engine_capacity = st.number_input('Engine Capacity (cc)', value=814.0,step=100.0,min_value=50.0, max_value=100000.0)
-kms_driven = st.number_input('Kilometers Driven', value=68336.4,step=1000.0,min_value=0.0)
-max_power = st.number_input('Maximum Power (bhp)', value=55.0,step=1.0,min_value=1.0)
-seats = st.number_input('Number of Seats', value=5,step=1,min_value=1)
-mileage = st.number_input('Mileage', value=21.0,step=0.5,min_value=0.0)
-insurance = st.selectbox('Insurance', ['Zero Dep','Comprehensive', 'First Party', 'Second Party','Third Party', 'Not Available'])
-transmission_type = st.selectbox('Transmission Type', ['Manual', 'Automatic'])
-fuel_type = st.selectbox('Fuel Type', ['Petrol','Diesel', 'CNG', 'LPG', 'Electric'])
-body_type = st.selectbox('Body Type', ['Hatchback', 'Sedan','SUV', 'MUV','Minivans', 'unknown_type', 'Pickup','Coupe','Convertibles'])
-owner_type = st.selectbox('Owner Type', ['First Owner', 'Second Owner', 'Third Owner', 'Fifth Owner', 'Fourth Owner'])
+st.write('Enter Car Details to get Estimated price') 
+
+col1, col2 = st.columns(2)
+name = col1.text_input('Car Name')
+owner_type = col2.selectbox('Owner Type', ['First Owner', 'Second Owner', 'Third Owner', 'Fifth Owner', 'Fourth Owner'])
+registered_year = col1.number_input('Registered Year', value=2016,step=1,min_value=1900, max_value=2024)
+engine_capacity = col2.number_input('Engine Capacity (cc)', value=814.0,step=100.0,min_value=50.0, max_value=100000.0)
+kms_driven = col1.number_input('Kilometers Driven', value=68336.4,step=1000.0,min_value=0.0)
+max_power = col2.number_input('Maximum Power (bhp)', value=55.0,step=1.0,min_value=1.0)
+seats = col1.number_input('Number of Seats', value=5,step=1,min_value=1)
+mileage = col2.number_input('Mileage', value=21.0,step=0.5,min_value=0.0)
+insurance = col1.selectbox('Insurance', ['Zero Dep','Comprehensive', 'First Party', 'Second Party','Third Party', 'Not Available'])
+transmission_type = col2.selectbox('Transmission Type', ['Manual', 'Automatic'])
+fuel_type = col1.selectbox('Fuel Type', ['Petrol','Diesel', 'CNG', 'LPG', 'Electric'])
+body_type = col2.selectbox('Body Type', ['Hatchback', 'Sedan','SUV', 'MUV','Minivans', 'unknown_type', 'Pickup','Coupe','Convertibles'])
+
 
 # Button to get estimated price
 if st.button('Get Price'):
@@ -67,7 +75,7 @@ if st.button('Get Price'):
     predictions = loaded_model.predict(df)
     
     # Display estimated price
-    st.success(f"Estimated Price: ₹ {predictions[0]}")
+    st.success(f"Estimated Price: ₹ {predictions[0]:.2f}")
     
     
 # Add sidebar heading
