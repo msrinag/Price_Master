@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(
+    page_title="Price Master",
+    page_icon=":car:"
+)
 @st.cache_data
 def load_data():
     data = pd.read_csv('Resources/car_resale_prices_cleaned.csv')
@@ -95,4 +99,4 @@ df_filtered = df.drop(columns=columns_to_exclude)
 st.write(df_filtered.iloc[start_idx:end_idx],index=False)
 st.write(f'Page {current_page} of {total_pages}')
 
-st.write(selected_fuel_type)
+
