@@ -22,8 +22,16 @@ def map_data_to_model(data):
     data['fuel_type_value'] = data['fuel_type_value'].map(fuel_mapping)
     data['body_type_value'] = data['body_type_value'].map(body_mapping)
     data['owner_type_Value'] = data['owner_type_Value'].map(owner_mapping)
+    nacheck(data)
     
     return data
+    
+    
+def nacheck(df):
+    na_mask = df.isna().any(axis=1)
+    if na_mask.any():
+    # Print the row numbers where missing values exist
+        st.write("Recheck values for Rows: "+"".join(map(str,na_mask[na_mask].index)))
 
 # Load the trained model
 with open('Resources/xgb_model.pkl', 'rb') as file:
@@ -124,7 +132,7 @@ def generate_download_button():
     )
     
   
-st.sidebar.write('\n')
+st.sidebar.write(':car:\n')
 st.sidebar.write('\n')
 st.sidebar.write('\n')
 st.sidebar.write('\n')
