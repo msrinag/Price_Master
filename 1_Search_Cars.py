@@ -60,7 +60,7 @@ if selected_owner_type:
     
 
 # Display the filtered data
-st.subheader('Filtered Cars')
+st.subheader('Pre-Owned Cars')
 
 
 price_range = st.slider('Price Range (₹)', min_value=int(df['resale_price'].min()), max_value=int(df['resale_price'].max()), value=(int(df['resale_price'].min()), int(df['resale_price'].max())))
